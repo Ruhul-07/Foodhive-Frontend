@@ -55,6 +55,7 @@ const Navbar = () => {
         <div>
             {user ? (<>
                 <img src={user?.photoURL || 'default-avatar.png'} alt="profile" />
+                <button>Log-Out</button>
             </>):
             <button className="btn">Login</button>
             }
