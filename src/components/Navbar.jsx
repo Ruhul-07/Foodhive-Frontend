@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import avatar from "../assets/avatar.png"
 
 const Navbar = () => {
-    const [user, setUser] = useState(null)
+  const { user, logOutUser } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOutUser()
+    .then(result => {
+      console.log('user succefully LogOut')
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+  }
   const links = (
     <>
       <li>
@@ -56,16 +67,31 @@ const Navbar = () => {
       <div className="navbar-end gap-2">
         {/* profile Image section */}
         <div>
-            {user ? (<>
-                <img src={user?.photoURL || 'default-avatar.png'} alt="profile" />
-                <button>Log-Out</button>
-            </>):
-            <button className="btn">Login</button>
-            }
+          {user ? (
+            <>
+              <div className="flex gap-4">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={user?.photoURL || avatar}
+                      alt="profile"
+                    />
+                  </div>
+                </div>
+                <button onClick={handleLogOut} className="btn">Log-Out</button>
+              </div>
+            </>
+          ) : (
+            <Link to="/auth/login">
+              <button className="btn">Login</button>
+            </Link>
+          )}
         </div>
-        <div>
-            {/* blank div */}
-        </div>
+        <div>{/* blank div */}</div>
       </div>
     </div>
   );
