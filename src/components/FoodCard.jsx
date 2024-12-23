@@ -1,0 +1,23 @@
+const FoodCard = ({ food }) => {
+  const { name, image, description, category, quantity } = food;
+  return (
+    <div className="card card-compact bg-base-100 w-96 shadow-xl">
+      <figure>
+        <img src={image} alt="Shoes" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title font-bold text-3xl">{name}</h2>
+        <p className="font-medium">{description}</p>
+        <div className="flex justify-between items-center text-base font-normal">
+          <p>Category: {category}</p>
+          <p>Quantity: {quantity}</p>
+        </div>
+        <div className="card-actions justify-center">
+          <button className="btn btn-warning w-full">Details</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FoodCard;
