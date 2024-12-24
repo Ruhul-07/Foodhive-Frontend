@@ -7,6 +7,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import Gallery from "../pages/Gallery";
+import FoodPurchase from "../pages/FoodPurchase";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
                 path: "foodDetails/:id",
                 element: <FoodDetails></FoodDetails>,
                 loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
+            },
+            {
+                path: "purchaseFood",
+                element: <FoodPurchase></FoodPurchase>
             },
             {
                 path: "gallery",

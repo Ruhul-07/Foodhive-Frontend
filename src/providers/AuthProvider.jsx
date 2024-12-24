@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
@@ -21,6 +21,15 @@ const AuthProvider = ({children}) => {
     const logOutUser = () => {
         return signOut(auth)
     }
+    // user update Profile
+    const updateUserProfile = (profileData) => {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          return updateProfile(currentUser, profileData);
+        } else {
+          throw new Error("No user is currently logged in.");
+        }
+      };
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
@@ -38,7 +47,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signInUser,
-        logOutUser
+        logOutUser,
+        updateUserProfile
     }
     return (
        <AuthContext.Provider value={authInfo}>

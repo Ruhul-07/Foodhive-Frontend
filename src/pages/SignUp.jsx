@@ -5,11 +5,13 @@ import { AuthContext } from "../providers/AuthProvider";
 import { NavLink } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile, setUser } = useContext(AuthContext);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
+    const photo = form.photo.value;
     const password = form.password.value;
     console.log(email, password);
 
@@ -17,7 +19,17 @@ const SignUp = () => {
     //show password validation error
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        const user =result.user;
+        setUser(user)
+        updateUserProfile({ displayName: name, photoURL: photo })
+        .then(result => {
+          setUser({
+            ...user,
+            displayName: name,
+            photoURL: photo,
+          });
+          e.target.reset(); 
+        })
       })
       .catch((error) => {
         console.log(error.message);
@@ -39,7 +51,7 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
-                name="email"
+                name="name"
                 placeholder="Your Name"
                 className="input input-bordered"
                 required

@@ -1,10 +1,14 @@
+import { useState } from "react";
+import { IoIosPricetags } from "react-icons/io";
 import { MdDescription, MdProductionQuantityLimits } from "react-icons/md";
 import { SiOrigin } from "react-icons/si";
 import { TbCategoryFilled } from "react-icons/tb";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const FoodDetails = () => {
   const foodData = useLoaderData();
+  const [purchaseCount, setPurchaseCount] = useState(foodData.purchaseCount || 0)
+  console.log(purchaseCount)
   const {
     image,
     name,
@@ -13,6 +17,7 @@ const FoodDetails = () => {
     shortDescription,
     foodOrigin,
     quantity,
+    price
   } = foodData;
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -24,7 +29,7 @@ const FoodDetails = () => {
           <h2 className="card-title font-extrabold text-4xl">{name}</h2>
           <p className="font-normal">{description}</p>
         </div>
-        <div className="mb-10">
+        <div className="mb-10 space-y-4">
           <p>
             <TbCategoryFilled className="inline mr-4 text-2xl" />
             Category: {category}
@@ -34,13 +39,18 @@ const FoodDetails = () => {
             Food-Origin: {foodOrigin}
           </p>
           <p><MdProductionQuantityLimits className="inline mr-4 text-2xl"/>Quantity: {quantity}</p>
+          <p><IoIosPricetags className="inline mr-4 text-2xl"/>Price: ${price}</p>
           <p>
             <MdDescription className="inline mr-4 text-2xl" />
             {shortDescription}
           </p>
         </div>
         <div className="card-actions justify-center">
-          <button className="btn btn-warning">Purchase</button>
+          <Link to="/purchaseFood" state={{
+              name,
+              quantity,
+              price
+            }}><button className="btn btn-warning">Purchase</button></Link>
         </div>
       </div>
     </div>
