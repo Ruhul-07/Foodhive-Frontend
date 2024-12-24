@@ -91,7 +91,7 @@ const SignUp = () => {
           <p className="text-center -mt-4 text-sm mb-5">
             already have an account?{'\u00A0'}
             <NavLink to="/auth/login">
-              <span className="italic text-blue-700 text-lg">Log In</span>
+              <span className="text-blue-700 text-lg">Log In</span>
             </NavLink>
           </p>
         </div>

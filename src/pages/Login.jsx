@@ -17,7 +17,7 @@ const Login = () => {
     signInUser(email, password)
     .then(result => {
         const user = result.user;
-        setUserId(user)
+        setUser(user)
     })
     .catch(error => {
         console.log(error.message)
@@ -65,7 +65,7 @@ const Login = () => {
           <p className="text-center -mt-4 text-sm">
             already have an account?{"\u00A0"}
             <NavLink to="/auth/signUp">
-              <span className="italic text-blue-700 text-lg">Login</span>
+              <span className="text-blue-700 text-lg">SignUp</span>
             </NavLink>
           </p>
           <div className="divider w-[320px] mx-auto">OR</div>
