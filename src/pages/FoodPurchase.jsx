@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { format } from "date-fns";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const FoodPurchase = () => {
     const {user} = useContext(AuthContext)
     const location = useLocation();
-    const { name, quantity, price } = location.state || {};
+    const navigate = useNavigate();
+    const { id, name, quantity, price } = location.state || {};
     console.log(name)
 
     const [formData, setFormData] = useState({
@@ -15,6 +18,7 @@ const FoodPurchase = () => {
       quantity: quantity || "",
       buyerName: user?.displayName || "",
       buyerEmail: user?.email || "",
+      foodId: id,
     });
     console.log("Initial Form Data:", formData);
 
@@ -29,9 +33,17 @@ const FoodPurchase = () => {
         const purchaseData = {
           ...formData,
           buyingDate: format(new Date(), "MMMM dd, yyyy h:mm:ss a"),
-        }
-        console.log("Form Data to Submit:", purchaseData);
-    }
+        };
+        
+        axios.post('http://localhost:5000/purchaseFood', purchaseData)
+        .then(res => {
+          toast.success('Food items purchase Succesfully')
+          navigate("/myOrders")
+        })
+        .catch(error => {
+          toast.error('Error purchasing food')
+        })
+    };
     return (
         <div className="container mx-auto py-10">
         <h1 className="text-3xl text-center font-bold mb-6">Purchase Food</h1>

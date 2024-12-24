@@ -1,15 +1,15 @@
-import { useState } from "react";
+
 import { IoIosPricetags } from "react-icons/io";
 import { MdDescription, MdProductionQuantityLimits } from "react-icons/md";
+import { PiClockCounterClockwiseBold } from "react-icons/pi";
 import { SiOrigin } from "react-icons/si";
 import { TbCategoryFilled } from "react-icons/tb";
 import { Link, useLoaderData } from "react-router-dom";
 
 const FoodDetails = () => {
   const foodData = useLoaderData();
-  const [purchaseCount, setPurchaseCount] = useState(foodData.purchaseCount || 0)
-  console.log(purchaseCount)
   const {
+    _id,
     image,
     name,
     description,
@@ -17,7 +17,8 @@ const FoodDetails = () => {
     shortDescription,
     foodOrigin,
     quantity,
-    price
+    price,
+    purchaseCount
   } = foodData;
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -29,7 +30,7 @@ const FoodDetails = () => {
           <h2 className="card-title font-extrabold text-4xl">{name}</h2>
           <p className="font-normal">{description}</p>
         </div>
-        <div className="mb-10 space-y-4">
+        <div className="mb-10 space-y-4 font-medium">
           <p>
             <TbCategoryFilled className="inline mr-4 text-2xl" />
             Category: {category}
@@ -40,6 +41,7 @@ const FoodDetails = () => {
           </p>
           <p><MdProductionQuantityLimits className="inline mr-4 text-2xl"/>Quantity: {quantity}</p>
           <p><IoIosPricetags className="inline mr-4 text-2xl"/>Price: ${price}</p>
+          <p><PiClockCounterClockwiseBold className="inline mr-4 text-2xl"/>purchaseCount: {purchaseCount}</p>
           <p>
             <MdDescription className="inline mr-4 text-2xl" />
             {shortDescription}
@@ -47,9 +49,10 @@ const FoodDetails = () => {
         </div>
         <div className="card-actions justify-center">
           <Link to="/purchaseFood" state={{
+              id: _id,
               name,
               quantity,
-              price
+              price,
             }}><button className="btn btn-warning">Purchase</button></Link>
         </div>
       </div>
