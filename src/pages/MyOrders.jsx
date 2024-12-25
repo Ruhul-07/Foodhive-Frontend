@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import moment from "moment/moment";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,17 @@ const MyOrders = () => {
         });
     }
   }, [user]);
+
+  const handleDelete = (orderId) =>{
+    axios.delete(`http://localhost:5000/deleteOrder/${orderId}`)
+    .then(res => {
+      setOrders(orders.filter((order) => order._id !== orderId));
+      toast.success('Order Deleted succesfully')
+    })
+    .catch(error => {
+      toast.error('Failed to delete the order')
+    })
+  }
   return (
     <div className="container mx-auto py-10">
     <h2 className="text-center text-3xl font-bold mb-6">My Orders</h2>
