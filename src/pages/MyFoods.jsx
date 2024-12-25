@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const MyFoods = () => {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -19,6 +21,10 @@ const MyFoods = () => {
         .catch((err) => console.error(err));
     }
   }, [user?.email]);
+
+  const handleUpdate = (foodId) => {
+    navigate(`/updateFood/${foodId}`);
+  }
 
   return (
     <div className="container mx-auto py-10">
@@ -49,7 +55,7 @@ const MyFoods = () => {
               <td className="px-4 py-2">${food.price}</td>
               <td className="px-4 py-2">
                 <button
-                  onClick={() => handleUpdate(food)}
+                  onClick={() => handleUpdate(food._id)}
                   className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                 >
                   Update
