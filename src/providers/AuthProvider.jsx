@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
@@ -30,6 +30,13 @@ const AuthProvider = ({children}) => {
           throw new Error("No user is currently logged in.");
         }
       };
+
+      // sign in with google
+      const provider = new GoogleAuthProvider()
+      const signInWithGoogle = () => {
+        return signInWithPopup(auth, provider)
+      }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
@@ -48,6 +55,7 @@ const AuthProvider = ({children}) => {
         createUser,
         signInUser,
         logOutUser,
+        signInWithGoogle,
         updateUserProfile
     }
     return (

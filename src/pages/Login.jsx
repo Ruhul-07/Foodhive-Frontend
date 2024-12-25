@@ -3,30 +3,50 @@ import loginLottieData from "../assets/animation/login.json";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const from = location.state?.from?.pathname || "/";
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    // form data collect
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
-    signInUser(email, password)
-    .then(result => {
-        const user = result.user;
-        setUser(user)
-        navigate(from, { replace: true });
-    })
-    .catch(error => {
-        console.log(error.message)
-    })
+    try{
+      const result = await signInUser(email, password);
+      const user = result.user;
+      toast.success("Successfully logged in!");
+      navigate(from, { replace: true });
+    } catch (err) {
+      toast.error(err.message || "Failed to log in!")
+      setError(err.message);
+    } finally {
+      setLoading(false)
+    }
   };
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+    .then(result => {
+      const user = result.user;
+      navigate(location.state?.from || "/");
+    })
+    .catch((err) => {
+      setError({ ...error, login: err.code });
+    });
+  }
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col gap-10 lg:flex-row-reverse">
@@ -62,6 +82,7 @@ const Login = () => {
                 required
               />
             </div>
+            {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
@@ -74,7 +95,7 @@ const Login = () => {
           </p>
           <div className="divider w-[320px] mx-auto">OR</div>
           <div className="form-control mb-5">
-            <button className="btn btn-outline mx-auto w-[320px]">
+            <button onClick={handleGoogleLogin} className="btn btn-outline mx-auto w-[320px]">
               <FcGoogle className="text-xl" />
               Login With Google
             </button>
