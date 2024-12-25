@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Gallery from "../pages/Gallery";
 import FoodPurchase from "../pages/FoodPurchase";
 import MyOrders from "../pages/MyOrders";
+import AddFood from "../pages/AddFood";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
                 path: "allfoods",
                 element: <AllFoods></AllFoods>,
                 loader: () => fetch('http://localhost:5000/foods')
+            },
+            {
+                path: 'addFood',
+                element: <AddFood></AddFood>
             },
             {
                 path: "foodDetails/:id",
