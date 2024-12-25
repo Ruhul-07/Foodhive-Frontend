@@ -1,12 +1,15 @@
 import Lottie from "lottie-react";
 import loginLottieData from "../assets/animation/login.json";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,6 +21,7 @@ const Login = () => {
     .then(result => {
         const user = result.user;
         setUser(user)
+        navigate(from, { replace: true });
     })
     .catch(error => {
         console.log(error.message)

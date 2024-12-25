@@ -12,6 +12,7 @@ import MyOrders from "../pages/MyOrders";
 import AddFood from "../pages/AddFood";
 import MyFoods from "../pages/MyFoods";
 import UpdateFood from "../pages/UpdateFood";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -29,15 +30,15 @@ const router = createBrowserRouter([
             },
             {
                 path: 'addFood',
-                element: <AddFood></AddFood>
+                element:<PrivateRoute> <AddFood></AddFood></PrivateRoute>
             },
             {
                 path: 'myFoods',
-                element: <MyFoods></MyFoods>
+                element: <PrivateRoute><MyFoods></MyFoods></PrivateRoute>
             },
             {
                 path: 'updateFood/:id',
-                element: <UpdateFood></UpdateFood>
+                element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>
             },
             {
                 path: "foodDetails/:id",
@@ -46,11 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "purchaseFood",
-                element: <FoodPurchase></FoodPurchase>
+                element:<PrivateRoute> <FoodPurchase></FoodPurchase></PrivateRoute>
             },
             {
                 path: "myOrders",
-                element: <MyOrders></MyOrders>
+                element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
             },
             {
                 path: "gallery",
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
                 element: <Login></Login>
             }
         ]
+    },
+    {
+        path: "*",
+        element: <div>404 - Page Not Found</div>
     }
 ])
 
