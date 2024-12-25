@@ -1,11 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import avatar from "../assets/avatar.png";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const Navbar = () => {
+  const { isDark, toggleTheme } = useContext(ThemeContext);
   const { user, logOutUser } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.body.setAttribute("data-theme", "dark");
+    } else {
+      document.body.removeAttribute("data-theme");
+    }
+  }, [isDark]);
+
 
   const handleLogOut = () => {
     logOutUser()
@@ -73,6 +84,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-4">{links}</ul>
       </div>
       <div className="navbar-end gap-2">
+
+       {/* theme toogling section */}
+       <div className="flex flex-col justify-center items-center">
+          <input
+            type="checkbox"
+            className="toggle toggle-lg"
+            checked={isDark}
+            onChange={toggleTheme}
+            aria-label="Toggle dark/light theme"
+          />
+        </div>
+
         {/* profile Image section */}
         <div className="relative">
           {user ? (
