@@ -1,19 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import avatar from "../assets/avatar.png"
+import avatar from "../assets/avatar.png";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleLogOut = () => {
     logOutUser()
-    .then(result => {
-      console.log('user succefully LogOut')
-    })
-    .catch(error => {
-      console.log(error.message)
-    })
-  }
+      .then((result) => {
+        console.log("user succefully LogOut");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+    console.log("Dropdown toggled: ", !isDropdownOpen);
+  };
+
   const links = (
     <>
       <li>
@@ -66,7 +74,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-2">
         {/* profile Image section */}
-        <div>
+        <div className="relative">
           {user ? (
             <>
               <div className="flex gap-4">
@@ -74,16 +82,50 @@ const Navbar = () => {
                   tabIndex={0}
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
+                  onClick={toggleDropdown}
                 >
                   <div className="w-10 rounded-full">
-                    <img
-                      src={user?.photoURL || avatar}
-                      alt="profile"
-                    />
+                    <img src={user?.photoURL || avatar} alt="profile" />
                   </div>
                 </div>
-                <button onClick={handleLogOut} className="btn">Log-Out</button>
+                <button onClick={handleLogOut} className="btn">
+                  Log-Out
+                </button>
               </div>
+              {/* dropdown section */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20">
+                  <ul>
+                    <li>
+                      <Link
+                        to="/myFoods"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        My Foods
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/addFood"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        Add Food
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/myOrders"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        My Orders
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </>
           ) : (
             <Link to="/auth/login">
