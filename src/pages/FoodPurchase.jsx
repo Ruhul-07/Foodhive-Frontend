@@ -9,7 +9,7 @@ const FoodPurchase = () => {
     const {user} = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
-    const { id, name, quantity, price } = location.state || {};
+    const { id, name, quantity, price, image } = location.state || {};
     console.log(name)
 
     const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ const FoodPurchase = () => {
       buyerName: user?.displayName || "",
       buyerEmail: user?.email || "",
       foodId: id,
+      foodImg: image || "",
     });
     console.log("Initial Form Data:", formData);
 
@@ -88,6 +89,22 @@ const FoodPurchase = () => {
               id="quantity"
               name="quantity"
               value={formData.quantity}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              min="1"
+            />
+          </div>
+
+          {/* Food Image */}
+          <div>
+            <label className="block text-lg font-medium mb-2" htmlFor="quantity">
+              Food Image
+            </label>
+            <input
+              type="text"
+              id="quantity"
+              name="foodImg"
+              value={formData.foodImg}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded"
               min="1"

@@ -53,6 +53,7 @@ const FoodDetails = () => {
               name,
               quantity,
               price,
+              image
             }}><button className="btn btn-warning">Purchase</button></Link>
         </div>
       </div>
