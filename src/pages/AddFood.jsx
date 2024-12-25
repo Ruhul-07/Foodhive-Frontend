@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -48,8 +50,8 @@ const AddFood = () => {
       shortDescription: "",
       foodOrigin: "",
       addedBy: {
-        name: user?.displayName || "Admin",
-        email: user?.email || "admin@foodhive.com",
+        name: user?.displayName,
+        email: user?.email,
       },
     });
   };
@@ -57,10 +59,15 @@ const AddFood = () => {
   const handleAddFood = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/addFood", formData)
+      .post("http://localhost:5000/addFood", formData, {
+        headers: {
+            "Content-Type": "application/json",
+          },
+      })
       .then((res) => {
         toast.success("Food added successfully");
         console.log(res.data);
+        navigate("/myFoods")
         resetFormData();
       })
       .catch((error) => {
