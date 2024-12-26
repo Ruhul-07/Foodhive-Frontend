@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             {
                 path: "allfoods",
                 element: <AllFoods></AllFoods>,
-                loader: () => fetch('http://localhost:5000/foods')
+                loader: () => fetch('https://food-hive-backend.vercel.app/foods')
             },
             {
                 path: 'addFood',
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
             {
                 path: "foodDetails/:id",
                 element: <FoodDetails></FoodDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
+                loader: ({params}) => fetch(`https://food-hive-backend.vercel.app/foods/${params.id}`)
             },
             {
                 path: "purchaseFood",

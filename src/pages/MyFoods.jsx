@@ -12,9 +12,9 @@ const MyFoods = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/myFoods?email=${user.email}`)
+        .get(`https://food-hive-backend.vercel.app/myFoods?email=${user.email}`)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setFoods(res.data);
         })
         .catch((err) => console.error(err));

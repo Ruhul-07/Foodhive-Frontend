@@ -29,7 +29,7 @@ const Login = () => {
       const result = await signInUser(email, password);
       const user = result.user;
       await axios.post(
-        "http://localhost:5000/jwt",
+        "https://food-hive-backend.vercel.app/jwt",
         { email: user.email },
         { withCredentials: true }
       );

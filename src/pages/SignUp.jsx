@@ -16,20 +16,30 @@ const SignUp = () => {
     console.log(email, password);
 
     //password validation
-    //show password validation error
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    // if (!passwordRegex.test(password)) {
+    //   setError(
+    //     "Password must be at least 6 characters long, contain at least one uppercase letter, and one lowercase letter."
+    //   );
+    //   return;
+    // }
+
+    // setError("");
     createUser(email, password)
       .then((result) => {
-        const user =result.user;
-        setUser(user)
-        updateUserProfile({ displayName: name, photoURL: photo })
-        .then(result => {
-          setUser({
-            ...user,
-            displayName: name,
-            photoURL: photo,
-          });
-          e.target.reset(); 
-        })
+        const user = result.user;
+        setUser(user);
+        updateUserProfile({ displayName: name, photoURL: photo }).then(
+          (result) => {
+            setUser({
+              ...user,
+              displayName: name,
+              photoURL: photo,
+            });
+            e.target.reset();
+          }
+        );
       })
       .catch((error) => {
         console.log(error.message);
@@ -101,7 +111,7 @@ const SignUp = () => {
             </div>
           </form>
           <p className="text-center -mt-4 text-sm mb-5">
-            already have an account?{'\u00A0'}
+            already have an account?{"\u00A0"}
             <NavLink to="/auth/login">
               <span className="text-blue-700 text-lg">Log In</span>
             </NavLink>

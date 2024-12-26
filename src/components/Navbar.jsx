@@ -20,13 +20,13 @@ const Navbar = () => {
 
 
   const handleLogOut = () => {
-    axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+    axios.post("https://food-hive-backend.vercel.app/logout", {}, { withCredentials: true });
     logOutUser()
       .then((result) => {
-        console.log("user succefully LogOut");
+        // console.log("user succefully LogOut");
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
   };
 
