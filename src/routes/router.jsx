@@ -14,6 +14,8 @@ import MyFoods from "../pages/MyFoods";
 import UpdateFood from "../pages/UpdateFood";
 import PrivateRoute from "./PrivateRoute";
 import TopFoods from "../pages/TopFoods";
+import ExploreCategories from "../pages/ExploreCategories";
+import FeaturedFoods from "../pages/FeaturedFoods";
 
 const router = createBrowserRouter([
     {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: "allfoods",
                 element: <AllFoods></AllFoods>,
-                loader: () => fetch('https://food-hive-backend.vercel.app/foods')
+                loader: () => fetch('http://localhost:5000/foods')
             },
             {
                 path: 'addFood',
@@ -48,7 +50,7 @@ const router = createBrowserRouter([
             {
                 path: "foodDetails/:id",
                 element: <FoodDetails></FoodDetails>,
-                loader: ({params}) => fetch(`https://food-hive-backend.vercel.app/foods/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/foods/${params.id}`)
             },
             {
                 path: "purchaseFood",
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
             {
                 path: "gallery",
                 element: <Gallery></Gallery>
+            },
+            {
+                path: "exploreCategory",
+                element: <ExploreCategories></ExploreCategories>
+            },
+            {
+                path: "featuredFoods",
+                element: <FeaturedFoods></FeaturedFoods>
             }
         ]
     },

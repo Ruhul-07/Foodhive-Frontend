@@ -1,31 +1,57 @@
 import Lottie from "lottie-react";
 import signUpLottieData from "../assets/animation/signUp.json";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 const SignUp = () => {
   const { createUser, updateUserProfile, setUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordValid, setPasswordValid] = useState(false);
+  const navigate = useNavigate();
+
+   // Validate password in real-time
+   const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        "Password must be at least 6 characters long, contain at least one uppercase letter, and one lowercase letter."
+      );
+      setPasswordValid(false);
+    } else {
+      setPasswordError("");
+      setPasswordValid(true);
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value.trim();
+    validatePassword(password);
+  };
+
+
   const handleRegister = (e) => {
     e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    console.log(email, password);
 
-    //password validation
-    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+      // Final validation before submission
+    if (!passwordValid) {
+      setLoading(false);
+      toast.error("Please fix the password issues before proceeding.");
+      return;
+    }
 
-    // if (!passwordRegex.test(password)) {
-    //   setError(
-    //     "Password must be at least 6 characters long, contain at least one uppercase letter, and one lowercase letter."
-    //   );
-    //   return;
-    // }
-
-    // setError("");
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -37,6 +63,8 @@ const SignUp = () => {
               displayName: name,
               photoURL: photo,
             });
+            toast.success("Account created successfully!");
+            navigate("/", { replace: true });
             e.target.reset();
           }
         );
@@ -104,7 +132,11 @@ const SignUp = () => {
                 placeholder="password"
                 className="input input-bordered"
                 required
+                onChange={handlePasswordChange}
               />
+               {passwordError && (
+                <span className="text-red-500 text-sm mt-2">{passwordError}</span>
+              )}
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">SignUp</button>

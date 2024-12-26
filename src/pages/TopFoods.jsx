@@ -45,7 +45,7 @@ const TopFoods = () => {
             </p>
 
             <div className="mt-4 flex gap-4">
-              <Link to={`/foods/${food._id}`} className="btn btn-primary">
+              <Link to={`/foods/${food._id}`} className="btn btn-info w-full">
                 Details
               </Link>
             </div>
@@ -54,7 +54,7 @@ const TopFoods = () => {
       </div>
 
       <div className="text-center mt-6">
-        <Link to="/allfoods" className="btn btn-outline">
+        <Link to="/allfoods" className="btn btn-warning">
           See All Foods
         </Link>
       </div>
