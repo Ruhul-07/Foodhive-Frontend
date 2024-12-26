@@ -13,6 +13,7 @@ import AddFood from "../pages/AddFood";
 import MyFoods from "../pages/MyFoods";
 import UpdateFood from "../pages/UpdateFood";
 import PrivateRoute from "./PrivateRoute";
+import TopFoods from "../pages/TopFoods";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>
+            },
+            {
+                path: 'topFoods',
+                element: <TopFoods></TopFoods>
             },
             {
                 path: "allfoods",

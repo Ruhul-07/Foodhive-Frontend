@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import avatar from "../assets/avatar.png";
 import { ThemeContext } from "../providers/ThemeProvider";
+import axios from "axios";
 
 const Navbar = () => {
   const { isDark, toggleTheme } = useContext(ThemeContext);
@@ -19,6 +20,7 @@ const Navbar = () => {
 
 
   const handleLogOut = () => {
+    axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
     logOutUser()
       .then((result) => {
         console.log("user succefully LogOut");

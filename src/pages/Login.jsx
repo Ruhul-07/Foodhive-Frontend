@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Login = () => {
   const { signInUser, signInWithGoogle} = useContext(AuthContext);
@@ -27,6 +28,12 @@ const Login = () => {
     try{
       const result = await signInUser(email, password);
       const user = result.user;
+      await axios.post(
+        "http://localhost:5000/jwt",
+        { email: user.email },
+        { withCredentials: true }
+      );
+      
       toast.success("Successfully logged in!");
       navigate(from, { replace: true });
     } catch (err) {
