@@ -1,6 +1,7 @@
 import Banner from "../components/Banner";
 import ExploreCategories from "./ExploreCategories";
 import FeaturedFoods from "./FeaturedFoods";
+import Testimonials from "./Testimonials";
 import TopFoods from "./TopFoods";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <div>
                 <ExploreCategories></ExploreCategories>
             </div>
+            <Testimonials></Testimonials>
         </div>
     );
 };

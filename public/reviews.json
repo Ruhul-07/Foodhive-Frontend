@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "643015aaf5a7e52ce1e8fb01",
+        "name": "Emily Carter",
+        "details": "The pizza was absolutely delicious, with a perfect crust and fresh toppings. I especially loved the variety of options available. Will definitely order again!",
+        "rating": 5
+    },
+    {
+        "_id": "643015bbf5a7e52ce1e8fb02",
+        "name": "Michael Brown",
+        "details": "The pasta was decent but lacked seasoning. The portion size was generous, though, and the service was quick.",
+        "rating": 3
+    },
+    {
+        "_id": "643015caf5a7e52ce1e8fb03",
+        "name": "Samantha Wilson",
+        "details": "The sushi was fresh and flavorful, and the presentation was beautiful. However, the pricing was slightly on the higher side.",
+        "rating": 4
+    },
+    {
+        "_id": "643015d7f5a7e52ce1e8fb04",
+        "name": "David Lee",
+        "details": "I was disappointed with the burger. It was overcooked and lacked flavor. The fries were decent, but overall, not worth the price.",
+        "rating": 2
+    },
+    {
+        "_id": "643015e4f5a7e52ce1e8fb05",
+        "name": "Olivia Martinez",
+        "details": "The dessert was heavenly! The chocolate lava cake was perfectly gooey, and the ice cream was a great addition. Highly recommend trying it!",
+        "rating": 5
+    }
+]
