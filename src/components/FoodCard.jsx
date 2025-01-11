@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const FoodCard = ({ food }) => {
   const { name, image, description, category, quantity } = food;
   return (
-    <div className="card card-compact bg-base-100 w-96 shadow-xl">
-      <figure>
-        <img src={image} alt="Shoes" />
+    <div className="card card-compact bg-base-100 shadow-xl">
+      <figure className="h-48">
+        <img className="w-full h-full object-cover" src={image} alt={name} />
       </figure>
       <div className="card-body">
         <h2 className="card-title font-bold text-3xl">{name}</h2>

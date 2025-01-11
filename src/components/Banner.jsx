@@ -36,7 +36,7 @@ const Banner = () => {
       }}
       onSwiper={(swiper) => swiper}
       onSlideChange={() => "slide change"}
-      className="w-full h-[500px]"
+      className="w-full h-[450px]"
     >
       <SwiperSlide>
         <div className="w-full h-full relative">

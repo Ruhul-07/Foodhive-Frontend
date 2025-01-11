@@ -38,27 +38,30 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" activeClassName="text-background underline">Home</NavLink>
       </li>
       <li>
-        <NavLink to="allfoods">All Foods</NavLink>
+        <NavLink to="allfoods" activeClassName="text-background underline">All Foods</NavLink>
       </li>
       <li>
-        <NavLink to="gallery">Gallery</NavLink>
+        <NavLink to="gallery" activeClassName="text-background underline">Gallery</NavLink>
       </li>
       <li>
-        <NavLink to="auth/signUp">SignUp</NavLink>
+        <NavLink to="contactUs" activeClassName="text-background underline">Contact Us</NavLink>
+      </li>
+      <li>
+        <NavLink to="auth/signUp" activeClassName="text-background underline">SignUp</NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar h-20">
+    <div className="px-12 navbar bg-primary text-white sticky z-20 top-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -73,30 +76,19 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content font-semibold text-lg bg-base-100 rounded-box z-[10] mt-3 w-52 shadow-lg"
           >
             {links}
           </ul>
         </div>
-        <Link to="/" className="ml-5 text-3xl font-bold">
+        <Link to="/" className=" text-text text-3xl font-bold">
           FoodHive
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-4">{links}</ul>
+        <ul className="menu menu-horizontal px-1 gap-4 font-semibold text-lg">{links}</ul>
       </div>
       <div className="navbar-end gap-2">
-
-       {/* theme toogling section */}
-       <div className="flex flex-col justify-center items-center">
-          <input
-            type="checkbox"
-            className="toggle toggle-lg"
-            checked={isDark}
-            onChange={toggleTheme}
-            aria-label="Toggle dark/light theme"
-          />
-        </div>
 
         {/* profile Image section */}
         <div className="relative">
@@ -154,11 +146,20 @@ const Navbar = () => {
             </>
           ) : (
             <Link to="/auth/login">
-              <button className="btn">Login</button>
+              <button className="btn bg-accent">Login</button>
             </Link>
           )}
         </div>
-        <div>{/* blank div */}</div>
+         {/* theme toogling section */}
+       <div className="flex flex-col justify-center items-center">
+          <input
+            type="checkbox"
+            className="toggle toggle-lg"
+            checked={isDark}
+            onChange={toggleTheme}
+            aria-label="Toggle dark/light theme"
+          />
+        </div>
       </div>
     </div>
   );

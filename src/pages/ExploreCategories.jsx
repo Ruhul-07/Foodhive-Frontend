@@ -18,13 +18,19 @@ const ExploreCategories = () => {
         image: "https://i.ibb.co.com/b2BgRKN/juice.jpg",
         description: "Refreshing drinks for every occasion.",
       },
+      {
+        id: 4,
+        title: "Beverages",
+        image: "https://i.ibb.co.com/b2BgRKN/juice.jpg",
+        description: "Refreshing drinks for every occasion.",
+      },
     ];
   
     return (
-      <section className="py-12 bg-gray-50">
+      <section className="py-12">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-8">Explore Categories</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {categories.map((category) => (
               <div key={category.id} className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
                 <img src={category.image} alt={category.title} className="w-full h-32 object-cover rounded-md mb-4" />
