@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const TopFoods = () => {
   const [topFoods, setTopFoods] = useState([]);
@@ -28,10 +29,18 @@ const TopFoods = () => {
           Top Selling Foods
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {topFoods.map((food) => (
-            <div
+          {topFoods.map((food, index) => (
+            <motion.div
+            style={{ overflow: 'visible', position: 'relative' }}
               key={food._id}
               className="card bg-white shadow-md rounded-lg p-4 hover:shadow-lg"
+              initial={{ opacity: 0, y: 100, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.2,
+                ease: "easeOut",
+              }}
             >
               <img
                 src={food.image}
@@ -49,13 +58,13 @@ const TopFoods = () => {
 
               <div className="mt-4 flex gap-4">
                 <Link
-                  to={`/foods/${food._id}`}
+                  to={`/foodDetails/${food?._id}`}
                   className="btn bg-primary w-full"
                 >
                   Details
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
