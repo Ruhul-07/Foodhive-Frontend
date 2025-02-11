@@ -41,14 +41,14 @@ const FeaturedFoods = () => {
             <motion.div
               key={food.id}
               className="flex flex-col p-6 h-full rounded-lg shadow-md hover:shadow-lg"
-              initial={{ opacity: 0, y: 50 }}  // Initial state: hidden and positioned lower
-              animate={{ opacity: 1, y: 0 }}  // Final state: visible and in normal position
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.8,
                 delay: 0.2,
-                ease: "easeOut", // Smooth easing
+                ease: "easeOut",
               }}
-              whileHover={{ scale: 1.05 }} // Scale up when hovering
+              whileHover={{ scale: 1.05 }}
             >
               <img
                 src={food.image}

@@ -4,7 +4,7 @@ const FoodCard = ({ food }) => {
   const { name, image, description, category, quantity } = food;
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
-      <figure className="h-48">
+      <figure className="h-48 w-full overflow-hidden">
         <img className="w-full h-full object-cover" src={image} alt={name} />
       </figure>
       <div className="card-body">
