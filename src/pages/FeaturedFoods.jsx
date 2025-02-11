@@ -33,7 +33,7 @@ const FeaturedFoods = () => {
   
     return (
 
-      <section className="py-12">
+      <section className="p-12">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">Featured Food Items</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">

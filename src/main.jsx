@@ -12,6 +12,7 @@ import ThemeProvider from "./providers/ThemeProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+   <div className="max-w-7xl mx-auto">
    <ThemeProvider>
    <AuthProvider>
       <RouterProvider router={router}>
@@ -19,5 +20,6 @@ createRoot(document.getElementById("root")).render(
       <ToastContainer />
     </AuthProvider>
    </ThemeProvider>
+   </div>
   </StrictMode>
 );
