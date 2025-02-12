@@ -5,13 +5,13 @@ const AuthLayout = () => {
     return (
         <div>
             <header>
-                <Navbar></Navbar>
+                {/* <Navbar></Navbar> */}
             </header>
             <main>
                 <Outlet></Outlet>
             </main>
             <footer>
-                <Footer></Footer>
+                {/* <Footer></Footer> */}
             </footer>
         </div>
     );

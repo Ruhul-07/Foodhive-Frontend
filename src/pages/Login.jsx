@@ -1,11 +1,12 @@
 import Lottie from "lottie-react";
 import loginLottieData from "../assets/animation/login.json";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { FaHome } from "react-icons/fa";
 
 const Login = () => {
   const { signInUser, signInWithGoogle} = useContext(AuthContext);
@@ -55,13 +56,20 @@ const Login = () => {
     });
   }
   return (
+    <>
+    <Link to="/">
+        <div className="flex items-center gap-2 place-content-center pt-2">
+          <FaHome className="text-3xl" />
+          <h3 className="text-2xl">Back to home</h3>
+        </div>
+      </Link>
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col gap-10 lg:flex-row-reverse">
         <div className="text-center lg:text-left md:h-96">
           <Lottie animationData={loginLottieData}></Lottie>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <h1 className="text-3xl font-bold text-center pt-5">Login</h1>
+          <h1 className="text-3xl font-bold text-center pt-2">Login</h1>
           <form onSubmit={handleLogin} className="card-body">
             {/* email input section */}
             <div className="form-control">
@@ -110,6 +118,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
