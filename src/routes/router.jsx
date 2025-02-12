@@ -18,6 +18,7 @@ import ExploreCategories from "../pages/ExploreCategories";
 import FeaturedFoods from "../pages/FeaturedFoods";
 import ContactUs from "../pages/ContactUs";
 import PageNotFound from "../components/PageNotFound";
+import AboutUs from "../pages/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: "contactUs",
                 element: <ContactUs></ContactUs>
+            },
+            {
+                path: "aboutUs",
+                element: <AboutUs></AboutUs>
             }
         ]
     },
