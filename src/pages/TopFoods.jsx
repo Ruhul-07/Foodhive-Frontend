@@ -25,9 +25,22 @@ const TopFoods = () => {
   return (
     <section id="contact" className="p-12">
       <div className="top-foods-container">
-        <h2 className="text-3xl font-bold mb-10 text-center">
+        <motion.div className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}>
+           <h2 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-md">
           Top Selling Foods
         </h2>
+        <motion.div
+          className="mt-2 mx-auto h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
+          style={{ width: "100px" }} // Adjust width as needed
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        ></motion.div>
+        </motion.div>
+       
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {topFoods.map((food, index) => (
             <motion.div

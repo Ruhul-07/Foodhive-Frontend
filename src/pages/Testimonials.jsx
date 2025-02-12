@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay} from "swiper/modules";
+import { motion } from "framer-motion";
 
 
 // Import Swiper styles
@@ -21,9 +22,21 @@ const Testimonials = () => {
 
     return (
         <section className="p-12">
-           <h2 className="text-center font-semibold text-3xl">
-            Testimonials
-           </h2>
+            <motion.div className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}>
+           <h2 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-md">
+          Testimonials
+        </h2>
+        <motion.div
+          className="mt-2 mx-auto h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
+          style={{ width: "100px" }} // Adjust width as needed
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        ></motion.div>
+        </motion.div>
             <Swiper navigation={true}
             autoplay={{
                 delay: 3000,

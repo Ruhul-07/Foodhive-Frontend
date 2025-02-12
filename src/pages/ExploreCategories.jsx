@@ -31,7 +31,21 @@ const ExploreCategories = () => {
 
       <section className="p-12">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Explore Categories</h2>
+      <motion.div className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}>
+           <h2 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-md">
+          Explore Categories
+        </h2>
+        <motion.div
+          className="mt-2 mx-auto h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
+          style={{ width: "100px" }} // Adjust width as needed
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        ></motion.div>
+        </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <motion.div

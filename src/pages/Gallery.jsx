@@ -2,6 +2,8 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { Thumbnails, Zoom } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
+import { motion } from "framer-motion";
+
 
 import img1 from "../assets/gallery/Greek Moussaka.jpg";
 import img2 from "../assets/gallery/Margherita Pizza.jpg";
@@ -37,9 +39,21 @@ const Gallery = () => {
   };
   return (
     <div className="bg-gray-100 py-10">
-      <h1 className="text-center text-5xl font-extrabold text-gray-800 mb-12">
-        <span className="border-b-4 border-emerald-500 pb-3">Gallery</span>
-      </h1>
+       <motion.div className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}>
+           <h2 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent drop-shadow-md">
+          Gallery
+        </h2>
+        <motion.div
+          className="mt-2 mx-auto h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
+          style={{ width: "100px" }} // Adjust width as needed
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        ></motion.div>
+        </motion.div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-20">
         {images.map((image, index) => (
           <div
