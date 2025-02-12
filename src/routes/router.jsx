@@ -17,6 +17,7 @@ import TopFoods from "../pages/TopFoods";
 import ExploreCategories from "../pages/ExploreCategories";
 import FeaturedFoods from "../pages/FeaturedFoods";
 import ContactUs from "../pages/ContactUs";
+import PageNotFound from "../components/PageNotFound";
 
 const router = createBrowserRouter([
     {
@@ -95,7 +96,7 @@ const router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <div>404 - Page Not Found</div>
+        element: <PageNotFound></PageNotFound>
     }
 ])
 
